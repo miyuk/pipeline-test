@@ -1,0 +1,7 @@
+---
+- name: Dummy Playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - ansible.builtin.debug:
+        msg: Test
