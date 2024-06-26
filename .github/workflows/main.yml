@@ -21,3 +21,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: cd roles/test_role && molecule test --all
+  run-ansible:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/ansible/creator-ee:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ansible-playbook good_playbook.yml
+  # run-job-template:
+  # configure-aap:
+  build-ee:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/ansible/creator-ee:latest
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+    steps:
+      - uses: actions/checkout@v4
+      - run: ansible-builder build
