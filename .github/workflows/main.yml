@@ -5,10 +5,19 @@ on:
   - push
 
 jobs:
-  ansible-lint:
+  lint:
     runs-on: ubuntu-latest
     container:
       image: quay.io/ansible/creator-ee:latest
     steps:
       - uses: actions/checkout@v4
-      - run: ansible-lint
+      - run: ansible-lint *.yml
+      - run: yamllint *.yml
+      - run: ansible-playbook --syntax-check *.yml
+  moulecule:
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/ansible/creator-ee:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cd roles/test_role && molecule test --all

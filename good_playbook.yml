@@ -3,5 +3,6 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - ansible.builtin.debug:
+    - name: Test Task
+      ansible.builtin.debug:
         msg: Test

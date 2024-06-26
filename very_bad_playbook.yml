@@ -1,0 +1,7 @@
+- name: dummy Playbook
+  hosts: localhost 
+ gather_facts: false
+  tasks:
+    - debug:
+        msg: Test
+  AAA
